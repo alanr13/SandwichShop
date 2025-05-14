@@ -1,5 +1,6 @@
 ﻿SandwichShop shop = new SandwichShop();
-shop.GetListOfIngredients();
+Sandwich sandwich = shop.MakeSandwich();
+Console.WriteLine(sandwich);
 
 class SandwichShop
 {
@@ -9,7 +10,7 @@ class SandwichShop
         Balance = 10000.00m;
     }
 
-    public void GetListOfIngredients()
+    private void GetListOfIngredients()
     {
         Console.WriteLine("----------BUNS----------");
         for (int i = 1; i < Enum.GetNames(typeof(Bun)).Length; i++)
@@ -48,10 +49,27 @@ class SandwichShop
         }
     }
 
-    //public Sandwich MakeSandwich()
-    //{
-    //    GetListOfIngredients();
-    //}
+    public Sandwich MakeSandwich()
+    {
+        int bun, spread, meat, cheese, vegetable, sauce;
+        Console.WriteLine("Hi, what can I get for you?");
+        GetListOfIngredients();
+
+        Console.WriteLine("What type of bun would you like?");
+        bun = int.Parse(Console.ReadLine());
+        Console.WriteLine("Nice, now pick your favourite spread, please.");
+        spread = int.Parse(Console.ReadLine());
+        Console.WriteLine("Good choice, time for a meat :).");
+        meat = int.Parse(Console.ReadLine());
+        Console.WriteLine("Cheese is a must have.");
+        cheese = int.Parse(Console.ReadLine());
+        Console.WriteLine("Some veggies?");
+        vegetable = int.Parse(Console.ReadLine());
+        Console.WriteLine("And a sauce for a finish");
+        sauce = int.Parse(Console.ReadLine());
+
+        return new Sandwich((Bun)bun, (Spread)spread, (Meat)meat, (Cheese)cheese, (Vegetable)vegetable, (Sauce)sauce);
+    }
 }
 
 class Client
@@ -63,7 +81,7 @@ class Client
         Balance = 100.00m;
     }
 }
-record Sandwich(string bun, string spread, string main, string vegetable, string sauce);
+record Sandwich(Bun bun, Spread spread, Meat meat, Cheese cheese, Vegetable vegetable, Sauce sauce);
 
 enum Bun
 {
@@ -74,7 +92,7 @@ enum Bun
     English_muffin,
     Brioche,
     Bagel,
-    Focaccia
+    Focaccia,
 }
 
 enum Spread
@@ -87,6 +105,7 @@ enum Spread
     Jam,
     Greek_yoghurt,
     Tapenade,
+    None
 }
 
 enum Meat
@@ -102,7 +121,8 @@ enum Meat
     Hard_boiled_egg,
     Chorizo,
     Mortadela,
-    Salami
+    Salami,
+    None
 }
 
 enum Cheese
@@ -117,7 +137,8 @@ enum Cheese
     Blue_cheese,
     Swiss,
     Feta,
-    Cottage_cheese
+    Cottage_cheese,
+    None
 }
 
 enum Vegetable
@@ -135,7 +156,8 @@ enum Vegetable
     Cabbage,
     Rocket,
     Red_beans,
-    White_beans
+    White_beans,
+    None
 }
 
 enum Sauce
@@ -151,5 +173,6 @@ enum Sauce
     Garlic,
     Chipotle,
     Honey_mustard,
-    Cranberry
+    Cranberry,
+    None
 }
