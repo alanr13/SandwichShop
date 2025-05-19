@@ -138,7 +138,7 @@ class SandwichShop
 
         decimal total = bunPrizes[bun - 1]
             + spreadPrizes[spread - 1] + meatPrizes[meat - 1] + cheesePrizes[cheese - 1] + vegetablePrizes[vegetable - 1] + saucePrizes[sauce - 1];
-        if (client.Balance > 0)
+        if (client.Balance >= total)
         {
             client.SetBalance(shop, total);
 
@@ -161,7 +161,7 @@ class Client
 
     public Client()
     {
-        Balance = 0.00m;
+        Balance = 14.70m;
     }
 
     internal decimal SetBalance(object caller, decimal value)
