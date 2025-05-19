@@ -138,10 +138,18 @@ class SandwichShop
 
         decimal total = bunPrizes[bun - 1]
             + spreadPrizes[spread - 1] + meatPrizes[meat - 1] + cheesePrizes[cheese - 1] + vegetablePrizes[vegetable - 1] + saucePrizes[sauce - 1];
+        if (client.Balance > 0)
+        {
+            client.SetBalance(shop, total);
 
-        client.SetBalance(shop, total);
+            Console.WriteLine($"That's the chad sandwich that you have composed there! It'il cost: {total}");
+        }
 
-    Console.WriteLine($"That's the chad sandwich that you have composed there! It'il cost: {total}");
+        else
+        {
+            Console.WriteLine("Sorry, but you don't have enough money.");
+            Environment.Exit(0);
+        }
 
         return new Sandwich((Bun)bun, (Spread)spread, (Meat)meat, (Cheese)cheese, (Vegetable)vegetable, (Sauce)sauce);
     }
@@ -153,7 +161,7 @@ class Client
 
     public Client()
     {
-        Balance = 100.00m;
+        Balance = 0.00m;
     }
 
     internal decimal SetBalance(object caller, decimal value)
